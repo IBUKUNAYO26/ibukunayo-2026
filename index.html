@@ -36,11 +36,13 @@
 
   <script>
     (function () {
+      var ID = '1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8';
       var img = document.getElementById('wrapLogo');
       var chain = [
-        'https://drive.google.com/thumbnail?id=1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8&sz=w800',
-        'https://lh3.googleusercontent.com/d/1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8',
-        'https://drive.google.com/uc?export=view&id=1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8'
+        'https://drive.google.com/thumbnail?id=' + ID + '&sz=w800',
+        'https://lh3.googleusercontent.com/d/' + ID,
+        'https://drive.usercontent.google.com/u/0/uc?id=' + ID + '&export=view',
+        'https://drive.google.com/uc?export=view&id=' + ID
       ];
       var i = 0;
       img.onerror = function () {
