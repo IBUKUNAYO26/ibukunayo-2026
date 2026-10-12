@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-  <meta name="theme-color" content="#660033">
+  <meta name="theme-color" content="#800020">
   <title>Ibukunayo 2026 — Bukola & Oluwabusayo</title>
   <style>
-    html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#660033;transition:background .9s ease}
-    body.soft{background:#FFF8F8}
-    #loader{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:#660033;transition:opacity .7s ease,visibility .7s ease}
+    html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#800020;transition:background .9s ease}
+    body.soft{background:#FDF0F3}
+    #loader{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:#800020;transition:opacity .7s ease,visibility .7s ease}
     #loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-    #loader img{width:min(52vw,230px);filter:brightness(0) invert(1) sepia(.22) saturate(1.05);animation:pulse 2.6s ease-in-out infinite alternate}
-    @keyframes pulse{from{opacity:.78;transform:scale(1)}to{opacity:1;transform:scale(1.02)}}
-    .bar{width:120px;height:2px;background:rgba(255,246,236,.2);position:relative;overflow:hidden}
-    .bar::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:2px;background:rgba(255,246,236,.85);animation:slide 1.4s ease-in-out infinite}
+    #loader img{width:min(52vw,230px);filter:brightness(0) invert(1) sepia(.14);animation:pulse 2.6s ease-in-out infinite alternate}
+    @keyframes pulse{from{opacity:.8;transform:scale(1)}to{opacity:1;transform:scale(1.02)}}
+    .bar{width:120px;height:2px;background:rgba(253,240,243,.25);position:relative;overflow:hidden}
+    .bar::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:2px;background:rgba(253,240,243,.9);animation:slide 1.4s ease-in-out infinite}
     @keyframes slide{to{left:110%}}
-    .cap{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,246,236,.65)}
-    #fallback{display:none;margin-top:4px;font-family:Georgia,serif;font-size:12px;color:#FFF6EC;text-decoration:underline}
+    .cap{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(253,240,243,.7)}
+    #fallback{display:none;margin-top:4px;font-family:Georgia,serif;font-size:12px;color:#FDF0F3;text-decoration:underline}
     iframe{width:100%;height:100%;border:none;display:block}
   </style>
 </head>
 <body>
   <div id="loader">
-    <img src="https://drive.google.com/thumbnail?id=1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8&sz=w800"
-         onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8';" alt="">
+    <img id="wrapLogo" src="https://drive.google.com/thumbnail?id=1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8&sz=w800" alt="">
     <div class="bar"></div>
     <div class="cap">Ibukunayo 2026</div>
     <a id="fallback" href="#" target="_blank" rel="noopener">Open directly</a>
@@ -36,10 +35,27 @@
     onload="document.getElementById('loader').classList.add('hidden')"></iframe>
 
   <script>
+    /* Logo fallback chain: thumbnail -> lh3 -> uc -> hide gracefully */
+    (function () {
+      var img = document.getElementById('wrapLogo');
+      var chain = [
+        'https://drive.google.com/thumbnail?id=1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8&sz=w800',
+        'https://lh3.googleusercontent.com/d/1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8',
+        'https://drive.google.com/uc?export=view&id=1kORqLABSYS6R7l0DgtvvQp-ufnnW3_E8'
+      ];
+      var i = 0;
+      img.onerror = function () {
+        i++;
+        if (i < chain.length) img.src = chain[i];
+        else img.style.display = 'none';
+      };
+      img.src = chain[0];
+    })();
+
     document.getElementById('fallback').href = document.getElementById('appFrame').src;
     window.addEventListener('message', function (ev) {
       if (ev.data && ev.data.ibk === 'ready') {
-        var soft = ev.data.soft || '#FFF8F8';
+        var soft = ev.data.soft || '#FDF0F3';
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', soft);
         document.body.classList.add('soft');
