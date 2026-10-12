@@ -11,7 +11,6 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            /* Match the soft ivory background */
             background-color: #FFF8F8;
         }
         
@@ -22,39 +21,23 @@
             display: block;
         }
         
-        /* Seamless loading state */
         .wrapper-loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: #FFF8F8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            transition: opacity 1s ease;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10; transition: opacity 1s ease;
         }
+        .wrapper-loader.hidden { opacity: 0; pointer-events: none; }
         
-        .wrapper-loader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        /* Minimalist luxury spinner */
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 1px solid rgba(93, 35, 34, 0.1);
             border-top-color: #5D2322;
             border-radius: 50%;
             animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -63,7 +46,7 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Replace the src below with your deployed Apps Script Web App URL -->
+    <!-- ⚠️ IMPORTANT: Replace the src below with your deployed Apps Script Web App URL -->
     <iframe 
         id="rsvp-frame"
         src="https://script.google.com/macros/s/AKfycbycPSTpdKJxpoqd8QDBa9EJt_SayhE4UZpih6wky_aiZfmKWmpDgVGOa--SuoksKREq/exec" 
